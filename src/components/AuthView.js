@@ -1,6 +1,6 @@
 window.SmartBank = window.SmartBank || {};
 
-window.SmartBank.renderAuthView = function(isRegisterMode = false) {
+window.SmartBank.renderAuthView = function (isRegisterMode = false) {
   if (isRegisterMode) {
     return `
       <main class="auth-page-wrapper">
@@ -15,6 +15,12 @@ window.SmartBank.renderAuthView = function(isRegisterMode = false) {
           </div>
 
           <form id="register-form">
+
+            <div class="form-group">
+              <label for="reg-name">Nom complet</label>
+              <input type="text" id="reg-name" class="form-control" placeholder="Jean Dupont" required />
+            </div>
+
             <div class="form-group">
               <label for="reg-email">Adresse e-mail</label>
               <input type="email" id="reg-email" class="form-control" placeholder="nom@exemple.fr" required />
@@ -35,7 +41,7 @@ window.SmartBank.renderAuthView = function(isRegisterMode = false) {
 
           <div class="auth-footer">
             <p class="auth-footer-text">
-              Déjà inscrit ? <a href="#login" class="auth-link">Se connecter</a>
+              Déjà inscrit ? <a href="/login" class="auth-link">Se connecter</a>
             </p>
           </div>
         </div>
@@ -74,7 +80,7 @@ window.SmartBank.renderAuthView = function(isRegisterMode = false) {
 
         <div class="auth-footer">
           <p class="auth-footer-text">
-            Nouveau chez SmartBank ? <a href="#register" class="auth-link">Créer un compte</a>
+            Nouveau chez SmartBank ? <a href="/register" class="auth-link">Créer un compte</a>
           </p>
         </div>
       </div>

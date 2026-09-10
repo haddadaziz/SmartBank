@@ -1,18 +1,21 @@
 window.SmartBank = window.SmartBank || {};
 
-window.SmartBank.renderDashboardView = function() {
+window.SmartBank.renderDashboardView = function () {
+  const currentUser = window.SmartBank.security ? window.SmartBank.security.getCurrentUser() : null;
+
+  const formattedBalance = Number(currentUser?.balance).toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '€';
   return `
     <main class="container">
       <div style="margin-bottom: 25px;">
-        <h2>Tableau de bord financier</h2>
+        <h2>Bienvenu , ${currentUser?.name || 'Utilisateur'}</h2>
         <p>Aperçu en temps réel de vos comptes et mouvements récents</p>
       </div>
 
       <div class="dashboard-grid">
         <div class="account-card primary-card">
           <div class="account-type">Compte Courant Principal</div>
-          <div class="account-number">N° de Compte : 300020059842</div>
-          <div class="account-balance">3 450,00 €</div>
+          <div class="account-number">${currentUser?.accountNumber || 'N° de Compte non disponible'}</div>
+          <div class="account-balance">${formattedBalance}</div>
         </div>
 
         <div class="account-card">
@@ -60,7 +63,7 @@ window.SmartBank.renderDashboardView = function() {
         </table>
 
         <div style="text-align: center; margin-top: 20px;">
-          <a href="#transactions" class="btn btn-outline">Voir tout l'historique</a>
+          <a href="/transactions" class="btn btn-outline">Voir tout l'historique</a>
         </div>
       </section>
     </main>

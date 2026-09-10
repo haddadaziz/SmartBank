@@ -1,6 +1,20 @@
 window.SmartBank = window.SmartBank || {};
 
 window.SmartBank.renderProfileView = function() {
+  const user = window.SmartBank.security ? window.SmartBank.security.getCurrentUser() : null;
+
+  const name = user?.name || 'Utilisateur';
+  const email = user?.email || 'email@exemple.fr';
+  const phone = user?.phone || '+33 6 12 34 56 78';
+  const address = user?.address || '12 Rue de la Paix, 75002 Paris';
+
+  const initials = name
+    .split(' ')
+    .filter(Boolean)
+    .map(word => word.charAt(0).toUpperCase())
+    .join('')
+    .substring(0, 2) || 'SB';
+
   return `
     <main class="container">
       <div style="margin-bottom: 25px;">
@@ -9,9 +23,9 @@ window.SmartBank.renderProfileView = function() {
       </div>
 
       <div class="profile-card">
-        <div class="profile-avatar">AH</div>
+        <div class="profile-avatar">${initials}</div>
         <div class="profile-details">
-          <h2>Aziz HADDAD</h2>
+          <h2>${name}</h2>
           <p><strong>Statut du compte :</strong> <span class="badge badge-success">Actif</span></p>
           <p><strong>Membre depuis :</strong> Septembre 2026</p>
         </div>
@@ -24,17 +38,17 @@ window.SmartBank.renderProfileView = function() {
           <form id="profile-info-form" style="margin-top: 15px;">
             <div class="form-group">
               <label for="profile-email">Adresse E-mail</label>
-              <input type="email" id="profile-email" class="form-control" value="aziz.haddad@smartbank.fr" required />
+              <input type="email" id="profile-email" class="form-control" value="${email}" required />
             </div>
 
             <div class="form-group">
               <label for="profile-phone">Numéro de Téléphone</label>
-              <input type="tel" id="profile-phone" class="form-control" value="+33 6 12 34 56 78" />
+              <input type="tel" id="profile-phone" class="form-control" value="${phone}" />
             </div>
 
             <div class="form-group">
               <label for="profile-address">Adresse Postale</label>
-              <input type="text" id="profile-address" class="form-control" value="12 Rue de la Paix, 75002 Paris" />
+              <input type="text" id="profile-address" class="form-control" value="${address}" />
             </div>
 
             <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Enregistrer les modifications</button>

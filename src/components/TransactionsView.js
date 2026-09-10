@@ -8,7 +8,7 @@ window.SmartBank.renderTransactionsView = function() {
           <h2>Historique Complet des Transactions</h2>
           <p>Consultez la liste intégrale de vos mouvements bancaires</p>
         </div>
-        <a href="#dashboard" class="btn btn-outline">← Retour au Dashboard</a>
+        <a href="/dashboard" class="btn btn-outline">← Retour au Dashboard</a>
       </div>
 
       <section class="transactions-section">

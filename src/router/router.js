@@ -1,31 +1,73 @@
 window.SmartBank = window.SmartBank || {};
 
-window.SmartBank.handleRouting = function() {
+window.SmartBank.navigateTo = function (path) {
+  window.history.pushState(null, '', path);
+  window.SmartBank.handleRouting();
+};
+
+window.SmartBank.handleRouting = function () {
   const root = document.getElementById('root');
   if (!root) return;
 
-  const currentHash = window.location.hash || '#dashboard';
+  let currentPath = window.location.pathname;
+  if (currentPath === '/' || currentPath.endsWith('/index.html')) {
+    currentPath = '/dashboard';
+  }
+
   const SB = window.SmartBank;
 
   const routes = {
-    '#dashboard': SB.renderDashboardView,
-    '#login': () => SB.renderAuthView(false),
-    '#register': () => SB.renderAuthView(true),
-    '#simulator': SB.renderSimulatorView,
-    '#offers': SB.renderOffersView,
-    '#rewards': SB.renderRewardsView,
-    '#profile': SB.renderProfileView,
-    '#transactions': SB.renderTransactionsView
+    '/': SB.renderDashboardView,
+    '/dashboard': SB.renderDashboardView,
+    '/login': () => SB.renderAuthView(false),
+    '/register': () => SB.renderAuthView(true),
+    '/simulator': SB.renderSimulatorView,
+    '/offers': SB.renderOffersView,
+    '/rewards': SB.renderRewardsView,
+    '/profile': SB.renderProfileView,
+    '/transactions': SB.renderTransactionsView
   };
 
-  const renderView = routes[currentHash] || renderNotFoundView;
-  const isAuthPage = currentHash === '#login' || currentHash === '#register';
-  const navbarHTML = isAuthPage ? '' : SB.renderNavbar(currentHash);
+  const publicRoutes = ['/login', '/register'];
+  const isAuthPage = publicRoutes.includes(currentPath);
+  const currentUser = SB.security ? SB.security.getCurrentUser() : null;
+
+  if (!currentUser && !isAuthPage) {
+    window.SmartBank.navigateTo('/login');
+    return;
+  }
+
+  const renderView = routes[currentPath] || renderNotFoundView;
+  const navbarHTML = isAuthPage ? '' : SB.renderNavbar(currentPath);
 
   root.innerHTML = `
     ${navbarHTML}
     ${renderView()}
   `;
+
+  if (isAuthPage && SB.auth && SB.auth.initAuthEvents) {
+    SB.auth.initAuthEvents();
+  }
+
+  if (currentPath === '/rewards' && SB.initRewardsEvents) {
+    SB.initRewardsEvents();
+  }
+
+  if (currentPath === '/simulator' && SB.initSimulatorEvents) {
+    SB.initSimulatorEvents();
+  }
+  window.SmartBank.attachLinkListeners();
+};
+
+window.SmartBank.attachLinkListeners = function () {
+  const links = document.querySelectorAll('a[href^="/"]');
+  links.forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      const path = this.getAttribute('href');
+      window.SmartBank.navigateTo(path);
+    });
+  });
 };
 
 function renderNotFoundView() {
@@ -33,7 +75,7 @@ function renderNotFoundView() {
     <main class="container" style="text-align: center; padding: 60px 20px;">
       <h1 style="font-size: 72px; color: var(--primary-color); margin-bottom: 10px;">404</h1>
       <h2 style="margin-bottom: 25px;">Page non trouvée</h2>
-      <a href="#dashboard" class="btn btn-primary">Retourner au Dashboard</a>
+      <a href="/dashboard" class="btn btn-primary">Retourner au Dashboard</a>
     </main>
   `;
 }
