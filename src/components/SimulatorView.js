@@ -50,7 +50,6 @@ window.SmartBank.renderSimulatorView = function () {
       <span style="font-size: 14px; color: #475569; font-weight: 600;">Mensualité estimée :</span>
       <div id="monthly-result" style="font-size: 38px; font-weight: 800; color: var(--primary-color); margin-top: 5px;">432,04 € / mois</div>
     </div>
-
     <div style="border-top: 1px solid #e2e8f0; padding-top: 15px;">
       <p style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 15px; color: #1e293b;">
         <span>Montant total dû :</span>
@@ -62,7 +61,6 @@ window.SmartBank.renderSimulatorView = function () {
       </p>
     </div>
   </div>
-
   <p style="font-size: 12px; color: #64748b; margin-top: 20px; line-height: 1.4;">*Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</p>
 </div>
 
