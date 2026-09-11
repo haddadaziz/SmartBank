@@ -5,7 +5,7 @@ window.SmartBank.renderNavbar = function(activePath = '/dashboard') {
     <header class="navbar">
       <div class="container navbar-container">
         <a href="#dashboard" class="navbar-logo">
-          <img src="./src/assets/logo.jpg" alt="SmartBank Logo" class="logo-img" />
+          <img src="/assets/logo.jpg" alt="SmartBank Logo" class="logo-img" />
         </a>
 
         <input type="checkbox" id="menu-toggle" class="menu-toggle-checkbox" />

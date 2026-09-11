@@ -36,14 +36,16 @@ SmartBank est un prototype d'application web FinTech développé en architecture
 
 ```text
 smart-bank/
-├── index.html
+├── package.json
 ├── README.md
 ├── server.js
+├── public/
+│   ├── index.html
+│   └── assets/
+│       ├── favicon.png
+│       └── logo.jpg
 └── src/
     ├── app.js
-    ├── assets/
-    │   ├── favicon.png
-    │   └── logo.jpg
     ├── auth/
     │   └── auth.js
     ├── components/

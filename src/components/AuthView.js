@@ -6,7 +6,7 @@ window.SmartBank.renderAuthView = function (isRegisterMode = false) {
       <main class="auth-page-wrapper">
         <div class="auth-card">
           <div class="auth-logo-wrapper">
-            <img src="./src/assets/logo.jpg" alt="SmartBank Logo" class="auth-logo-img" />
+            <img src="/assets/logo.jpg" alt="SmartBank Logo" class="auth-logo-img" />
           </div>
 
           <div class="auth-header">
@@ -53,7 +53,7 @@ window.SmartBank.renderAuthView = function (isRegisterMode = false) {
     <main class="auth-page-wrapper">
       <div class="auth-card">
         <div class="auth-logo-wrapper">
-          <img src="./src/assets/logo.jpg" alt="SmartBank Logo" class="auth-logo-img" />
+          <img src="/assets/logo.jpg" alt="SmartBank Logo" class="auth-logo-img" />
         </div>
 
         <div class="auth-header">
